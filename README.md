@@ -14,8 +14,8 @@ The objective of this project is to:
 
 - Build and compare three regression models (Linear Regression, Decision Tree, Random Forest)
 - Identify which features most influence student performance
-- Save the best-performing model for future use in a prediction API
-- Optimize the linear regression model using gradient descent
+- Save the best-performing model and expose it via a REST API
+- Build a Flutter mobile app that consumes the API to make real-time predictions
 
 ---
 
@@ -36,6 +36,52 @@ The dataset contains student records including study hours, previous academic sc
 
 ---
 
+## Live API
+
+**Public API endpoint:**
+```
+https://student-performance-api-2sd5.onrender.com/predict
+```
+
+**Swagger UI:**
+```
+https://student-performance-api-2sd5.onrender.com/docs
+```
+
+## Video Demo
+
+**YouTube Demo:** 
+
+---
+
+## Project Structure
+
+```
+linear_regression_model/
+│
+├── summative/
+│   ├── linear_regression/
+│   │   ├── multivariate.ipynb
+│   │   └── Student_Performance.csv    
+│   │
+│   ├── API/
+│   │   ├── prediction.py
+│   │   ├── requirements.txt
+│   │   ├── best_model.pkl
+│   │   ├── scaler.pkl
+│   │   └── feature_names.pkl
+│   │
+│   └── FlutterApp/
+│       └── student_performance_predictor/
+│           ├── lib/
+│           │   └── main.dart
+│           └── pubspec.yaml
+│
+└── README.md
+```
+
+---
+
 ## Implementation Overview
 
 All steps were implemented using the scikit-learn library and standard Python data science tools:
@@ -50,74 +96,8 @@ All steps were implemented using the scikit-learn library and standard Python da
 - Plotting a scatter plot before and after fitting the linear regression line
 - Comparing models by MSE and R2 score
 - Saving the best-performing model to disk
-
-The full implementation is available in the notebook below.
-
-**Notebook:**
-
-```
-linear_regression_model/summative/linear_regression/multivariate.ipynb
-```
-
----
-
-## Project Structure
-
-```
-linear_regression_model/
-│
-├── summative/
-│   ├── linear_regression/
-│   │   ├── multivariate.ipynb
-│   │   ├── Student_Performance.csv
-│   │   ├── best_model.pkl
-│   │   ├── scaler.pkl
-│   │   ├── feature_names.pkl
-│   │   └── x_test.csv
-│   ├── API/                        # Coming in Part 2
-│   └── FlutterApp/                 # Coming in Part 3
-```
-
----
-
-## Technical Requirements
-
-To run this project locally, ensure the following dependencies are installed:
-
-- Python 3.x
-- NumPy
-- Pandas
-- Matplotlib
-- Seaborn
-- Scikit-learn
-
-Install them using:
-
-```
-pip install numpy pandas matplotlib seaborn scikit-learn
-```
-
----
-
-## How to Run
-
-**1.** Clone the repository:
-
-```
-git clone https://github.com/Adossi-design/linear_regression_model.git
-```
-
-**2.** Open the project directory.
-
-**3.** Navigate to `linear_regression_model/summative/linear_regression/`.
-
-**4.** Launch Jupyter Notebook:
-
-```
-jupyter notebook
-```
-
-**5.** Open `multivariate.ipynb` and execute all cells in order.
+- Exposing the model via a FastAPI REST API deployed on Render
+- Building a Flutter mobile app that calls the API
 
 ---
 
@@ -131,5 +111,48 @@ jupyter notebook
 
 - **Linear Regression** achieved the lowest test MSE (4.08) and the highest R2 score (0.989), making it the best-performing model
 - This is expected because the dataset has a very strong linear relationship between Previous Scores and Performance Index (r = 0.92)
-- The loss curve confirms the model converges correctly using gradient descent
-- The before/after scatter plot clearly shows the linear regression line fitting well through the data
+
+---
+
+## How to Run the Flutter App
+
+**Requirements:**
+- Flutter SDK installed 
+- Android emulator or physical Android device
+
+**Steps:**
+
+**1.** Clone the repository:
+```
+git clone https://github.com/Adossi-design/linear_regression_model.git
+```
+
+**2.** Navigate to the Flutter app directory:
+```
+cd linear_regression_model/summative/FlutterApp/student_performance_predictor
+```
+
+**3.** Install dependencies:
+```
+flutter pub get
+```
+
+**4.** Run the app:
+```
+flutter run
+```
+
+**5.** Enter values in the 5 input fields and tap **Predict** to get the predicted Performance Index.
+
+---
+
+## API Technical Requirements
+
+To run the API locally:
+
+```
+pip install -r requirements.txt
+uvicorn prediction:app --reload
+```
+
+Dependencies: `fastapi`, `uvicorn`, `pydantic`, `numpy`, `pandas`, `scikit-learn`, `python-multipart`
