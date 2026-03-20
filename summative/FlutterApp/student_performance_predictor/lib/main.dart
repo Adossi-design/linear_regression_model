@@ -63,7 +63,7 @@ class PredictionPage extends StatefulWidget {
 class _PredictionPageState extends State<PredictionPage> {
   //API URL
   static const String _apiUrl =
-      'https://student-performance-api-2sd5.onrender.com';
+      'https://student-performance-api-2sd5.onrender.com/predict';
 
   final _formKey = GlobalKey<FormState>();
 
