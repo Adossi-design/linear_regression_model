@@ -21,7 +21,7 @@ The objective of this project is to:
 
 ## Dataset Description
 
-**Dataset used:** https://docs.google.com/presentation/d/1Ri8HBg7eHe8ka4_XjjL-3wsWfhQlwhXWTtcM5g3-Vfg/edit?usp=sharing
+**Dataset used:**
 
 ```
 Student_Performance.csv
@@ -50,7 +50,7 @@ https://student-performance-api-2sd5.onrender.com/docs
 
 ## Video Demo
 
-**Video Demo Link:** 
+**Video Demo Link:** https://docs.google.com/presentation/d/1Ri8HBg7eHe8ka4_XjjL-3wsWfhQlwhXWTtcM5g3-Vfg/edit?usp=sharing
 
 ---
 
